@@ -56,11 +56,9 @@ def _versions_differ(old, new):
         ov.pop('_oyster_id', None)
     return old != new
 
-
 bill_sneaky_update_filter = {
     'versions': _versions_differ,
 }
-
 
 def import_votes(data_dir):
     pattern = os.path.join(data_dir, 'votes', '*.json')
@@ -87,6 +85,7 @@ def import_bill(data, votes, categorizer):
     # clean up bill_ids
     # data['bill_id'] = fix_bill_id(data['bill_id'])
     data = billy.importers.filter.filter_bill_dict(data)
+
     if 'alternate_bill_ids' in data:
         data['alternate_bill_ids'] = [fix_bill_id(bid) for bid in
                                       data['alternate_bill_ids']]

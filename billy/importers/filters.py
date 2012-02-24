@@ -20,3 +20,7 @@ def fix_bill_id(bill_id):
     """
     bill_id = bill_id.replace('.', '')
     return _bill_id_re.sub(r'\1 \2', bill_id).strip()
+
+@register_filter
+def remove_newlines(blob):
+    return re.sub('\s+', ' ', blob)
