@@ -17,7 +17,6 @@ def filter_bill_dict( obj ):
 
 def register_filter( function ) :
     name = function.__name__
-
     if name in filters:
         raise KeyError( "Filter already exists" )
     filters[name] = function

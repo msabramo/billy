@@ -7,6 +7,7 @@ import logging
 from collections import defaultdict
 
 import billy.importers.filter
+from billy.importers.filters import fix_bill_id
 
 from billy.utils import metadata, keywordize, term_for_session
 from billy import db
@@ -211,16 +212,6 @@ def import_bills(abbr, data_dir):
     #populate_current_fields(level, abbr)
 
     ensure_indexes()
-
-
-# fixing bill ids
-_bill_id_re = re.compile(r'([A-Z]*)\s*0*([-\d]+)')
-
-
-def fix_bill_id(bill_id):
-    bill_id = bill_id.replace('.', '')
-    return _bill_id_re.sub(r'\1 \2', bill_id).strip()
-
 
 def bill_keywords(bill):
     """
