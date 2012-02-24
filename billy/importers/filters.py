@@ -1,5 +1,7 @@
 # filters
 
+import re # for fix_bill_id
+
 from billy.importers.filter import register_filter
 
 @register_filter

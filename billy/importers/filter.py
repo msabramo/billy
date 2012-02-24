@@ -1,5 +1,21 @@
 # Filter decorator & misc backup functions
 
+bill_filters = {
+    "default" : [ "fix_bill_id" ]
+}
+
+legislator_filters = {
+    "default" : []
+}
+committee_filters  = {
+    "default" : []
+}
+vote_filters       = {
+    "default" : []
+}
+
+# ----------------- Cut above this line -----------------
+
 filters = {}
 
 def register_filter( function ) :
