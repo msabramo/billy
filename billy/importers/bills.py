@@ -6,6 +6,8 @@ import json
 import logging
 from collections import defaultdict
 
+import billy.importers.filter
+
 from billy.utils import metadata, keywordize, term_for_session
 from billy import db
 from billy.importers.names import get_legislator_id
