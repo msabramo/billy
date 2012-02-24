@@ -79,13 +79,13 @@ def import_votes(data_dir):
     logger.info('imported %s vote files' % len(paths))
     return votes
 
-
 def import_bill(data, votes, categorizer):
     level = data['level']
     abbr = data[level]
 
     # clean up bill_ids
-    data['bill_id'] = fix_bill_id(data['bill_id'])
+    # data['bill_id'] = fix_bill_id(data['bill_id'])
+    data = billy.importers.filter.filter_bill_dict(data)
     if 'alternate_bill_ids' in data:
         data['alternate_bill_ids'] = [fix_bill_id(bid) for bid in
                                       data['alternate_bill_ids']]

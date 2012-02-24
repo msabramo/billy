@@ -1,22 +1,19 @@
 # Filter decorator & misc backup functions
 
 bill_filters = {
-    "default" : [ "fix_bill_id" ]
+    "bill_id" : [ "fix_bill_id" ]
 }
+filters = {}
 
-legislator_filters = {
-    "default" : []
-}
-committee_filters  = {
-    "default" : []
-}
-vote_filters       = {
-    "default" : []
-}
+def filter_bill_dict( obj ):
+    for attr in obj:
+        if attr in bill_filters:
+            filts = bill_filters[attr]
+            for f in filts:
+                obj[attr] = filters[f](obj[attr])
+    return obj
 
 # ----------------- Cut above this line -----------------
-
-filters = {}
 
 def register_filter( function ) :
     name = function.__name__
