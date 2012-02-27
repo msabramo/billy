@@ -2,7 +2,7 @@
 
 bill_filters = {
     "bill_id" : [ "fix_bill_id" ],
-    "title"   : [ "remove_newlines" ]
+    "title"   : [ "remove_newlines", "strip_bookend_spaces" ]
 }
 filters = {}
 
