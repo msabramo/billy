@@ -1,7 +1,8 @@
 # Filter decorator & misc backup functions
 
 bill_filters = {
-    "bill_id" : [ "fix_bill_id" ]
+    "bill_id" : [ "fix_bill_id" ],
+    "title"   : [ "remove_newlines" ]
 }
 filters = {}
 
