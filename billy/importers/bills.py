@@ -8,9 +8,9 @@ from collections import defaultdict
 
 import saucebrush
 
-from saucebrush.emitters import DebugEmitter
 from saucebrush.filters  import Splitter, Unique
 from billy.importers.filters import UnNewline, FixBillID
+from billy.importers.emitters import ObjectEmitter
 
 from billy.utils import metadata, keywordize, term_for_session
 from billy import db
@@ -85,8 +85,11 @@ def import_bill(data, votes, categorizer, oyster_documents=False):
     })
     unl = UnNewline('title')
     dbl = FixBillID('bill_id')
+    output = []
 
-    saucebrush.run_recipe([ data ], splitr, unl, dbl, DebugEmitter())
+    saucebrush.run_recipe([ data ], splitr, unl, dbl,
+                                ObjectEmitter(output))
+
 
     # clean up bill_ids
     data['bill_id'] = fix_bill_id(data['bill_id'])
