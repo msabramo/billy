@@ -6,6 +6,12 @@ import json
 import logging
 from collections import defaultdict
 
+import saucebrush
+
+from saucebrush.emitters import DebugEmitter
+from saucebrush.filters  import Splitter, Unique
+from billy.importers.filters import UnNewline, FixBillID
+
 from billy.utils import metadata, keywordize, term_for_session
 from billy import db
 from billy.importers.names import get_legislator_id
@@ -69,6 +75,18 @@ def import_votes(data_dir):
 def import_bill(data, votes, categorizer, oyster_documents=False):
     level = data['level']
     abbr = data[level]
+
+    splitr = Splitter({
+        'sponsors' : [ Unique() ],
+        'actions'  : [ Unique() ],
+        'documents': [ Unique() ],
+        'sources'  : [ Unique() ],
+        'versions' : [ Unique() ],
+    })
+    unl = UnNewline('title')
+    dbl = FixBillID('bill_id')
+
+    saucebrush.run_recipe([ data ], splitr, unl, dbl, DebugEmitter())
 
     # clean up bill_ids
     data['bill_id'] = fix_bill_id(data['bill_id'])
