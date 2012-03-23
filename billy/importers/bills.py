@@ -9,7 +9,7 @@ from collections import defaultdict
 import saucebrush
 
 from saucebrush.filters  import Splitter, Unique
-from billy.importers.filters import UnNewline, FixBillID
+from billy.importers.filters import *
 from billy.importers.emitters import ObjectEmitter
 
 from billy.utils import metadata, keywordize, term_for_session
@@ -85,17 +85,13 @@ def import_bill(data, votes, categorizer, oyster_documents=False):
     })
     unl = UnNewline('title')
     dbl = FixBillID('bill_id')
+    rin = RhodeIslandBillNormalizerHook()
+    bnh = BillNormalizerHook()
+    abf = AltBillFixer('alternate_bill_ids')
     output = []
 
-    saucebrush.run_recipe([ data ], splitr, unl, dbl,
+    saucebrush.run_recipe([ data ], splitr, unl, dbl, rin, abf,
                                 ObjectEmitter(output))
-
-
-    # clean up bill_ids
-    data['bill_id'] = fix_bill_id(data['bill_id'])
-    if 'alternate_bill_ids' in data:
-        data['alternate_bill_ids'] = [fix_bill_id(bid) for bid in
-                                      data['alternate_bill_ids']]
 
     # move subjects to scraped_subjects
     # NOTE: intentionally doesn't copy blank lists of subjects
