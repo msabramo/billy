@@ -6,13 +6,14 @@ scrapelib changelog
     * lots of improvements to billy admin
         * general style overhaul
         * duplicate_versions view
-    * removal of never-used RSS emitter
+    * API: removal of never-used RSS emitter and broken stats endpoint
     * billy-update command line radically changed
         * defaults to actually doing work
         * -vvv dropped
         * --strict dropped, --nostrict now exists
         * simplification of how --session/--term work
     * drop billy-util districtcsv in favor of an admin view
+    * previously internal bill ids are now 8 digits
     * addition of billy-update --oyster argument, adds tracking of versions
     * duplicate_versions is now just that, not versions+documents
     * bugfix: stop silently swallowing errors in subject csvs
