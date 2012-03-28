@@ -18,7 +18,7 @@ class UnNewline(Filter):
         return record
 
 _bill_id_re = re.compile(r'([A-Z]*)\s*0*([-\d]+)')
-def _fix_bill_id(self, bill_id):
+def _fix_bill_id(bill_id):
     bill_id = bill_id.replace('.', '')
     return _bill_id_re.sub(r'\1 \2', bill_id).strip()
 
