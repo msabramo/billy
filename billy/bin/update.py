@@ -226,6 +226,9 @@ def main(old_scrape_compat=False):
                             dest='SCRAPELIB_RETRY_ATTEMPTS')
         scrape.add_argument('--retry_wait', type=int,
                             dest='SCRAPELIB_RETRY_WAIT_SECONDS')
+        scrape.add_argument('-p', '--proxy_enabled', action='store_true',
+                            dest='SCRAPELIB_PROXY_ENABLED', 
+                            help="use scrapelib proxy settings")        
         # actions
         for arg in ('scrape', 'import', 'report'):
             parser.add_argument('--' + arg, dest='actions',
