@@ -1,8 +1,17 @@
 scrapelib changelog
 ===================
 
-0.9.7
+1.1.0-dev
 -----
+    * large refactor of billy.site.{browse,www} into billy.web.{admin,public}
+    * expose internal id on bills (and all objects)
+    * add API method for direct lookup of bills by id
+    * add support for text extraction from bills
+    * improved vote validation during scrape
+
+1.0.0
+-----
+**2 April 2012**
     * lots of improvements to billy admin
         * general style overhaul
         * duplicate_versions view
