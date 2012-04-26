@@ -118,6 +118,13 @@ class Scraper(scrapelib.Scraper):
             kwargs['retry_wait_seconds'] = \
                     settings.SCRAPELIB_RETRY_WAIT_SECONDS
 
+        if getattr(settings, 'SCRAPELIB_PROXY_ENABLED'):
+            for attr in ('SCRAPELIB_PROXY_HOST', 'SCRAPELIB_PROXY_PORT',
+                         'SCRAPELIB_HTTPLIB2_PROXY_TYPE'):
+                if hasattr(settings, attr):
+                    _attr = attr.replace('SCRAPELIB_', '', 1).lower()
+                    kwargs[_attr] = getattr(settings, attr)
+
         super(Scraper, self).__init__(**kwargs)
 
         for f in settings.BILLY_LEVEL_FIELDS[self.level]:
